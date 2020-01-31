@@ -20,7 +20,7 @@ function setDevTool() {  // function to set dev-tool depending on environment
 
 const config = {
   mode: ENV,
-  entry: __dirname + "/src/app/index.ts",
+  entry: __dirname + "/src/app/index.js",
   output: {
     path: __dirname + '/dist',
     filename: 'build.js',
