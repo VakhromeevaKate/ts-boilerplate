@@ -1,13 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const webpack = require('webpack');
 require('dotenv').config()
 const ENV = process.env.APP_ENV;
-const isTest = ENV === 'test'
+const isDev = ENV === 'dev'
 const isProd = ENV === 'prod';
 function setDevTool() {  // function to set dev-tool depending on environment
-    if (isTest) {
+    if (isDev) {
       return 'inline-source-map';
     } else if (isProd) {
       return 'source-map';
@@ -19,12 +20,26 @@ const config = {
   entry: __dirname + "/src/app/index.ts",
   output: {
     path: __dirname + '/dist',
-    filename: 'bundle.js',
+    filename: 'build.js',
     publicPath: '/' 
   },
   devtool: setDevTool(),
   module: { 
     rules: [ 
+
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            scss: 'vue-style-loader!css-loader!sass-loader',
+            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
+            js: 'babel-loader',
+            ts: 'ts-loader'
+          },
+          esModule: true
+        }
+      },
       {
         test: /\.js$/,
         use: 'babel-loader',
@@ -34,12 +49,24 @@ const config = {
       },
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'ts-loader',
         exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
       },
       {
         test: /\.(sass|scss)$/,
         use: [{
+            loader: "vue-style-loader"
+        }, {
             loader: "style-loader" // creates style nodes from JS strings
         }, {
             loader: "css-loader" // translates CSS into CommonJS
@@ -50,8 +77,19 @@ const config = {
     ]
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: [ '.tsx', '.ts', '.js', '.vue', '.json' ],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
   },
+  devServer: {
+    historyApiFallback: true,
+    noInfo: true
+  },
+  performance: {
+    hints: false
+  },
+  devtool: '#eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: __dirname + "/src/index.html",
@@ -60,6 +98,7 @@ const config = {
     new webpack.DefinePlugin({  // plugin to define global constants
         API_KEY: JSON.stringify(process.env.API_KEY)
     }),
+    new VueLoaderPlugin()
   ],
   devServer: {
       contentBase: './src/public',
