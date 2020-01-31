@@ -4,7 +4,9 @@
   "description": "A Vue.js currence convertor",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode=default",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production",
     "start": "webpack-dev-server --history-api-fallback --inline --progress",
     "test": "test"
   },

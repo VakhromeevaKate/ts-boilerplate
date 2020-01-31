@@ -5,8 +5,9 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 require('dotenv').config();
 const ENV = process.env.APP_ENV;
-const isDev = ENV === 'dev';
-const isProd = ENV === 'prod';
+const isDev = ENV === 'development';
+const isProd = ENV === 'production';
+
 function setDevTool() {  // function to set dev-tool depending on environment
     if (isDev) {
       return 'inline-source-map';
@@ -16,10 +17,12 @@ function setDevTool() {  // function to set dev-tool depending on environment
       return 'eval-source-map';
     }
 }
+
 const config = {
+  mode: ENV,
   entry: __dirname + "/src/app/index.ts",
   output: {
-    path: __dirname + '',
+    path: __dirname + '/dist',
     filename: 'build.js',
     publicPath: ''
   },
@@ -107,7 +110,7 @@ if (isProd) {
     config.plugins.push(
         new UglifyJSPlugin(),
         new CopyWebpackPlugin([{
-          from: __dirname + '/src/public'
+          from: __dirname + '/src'
       }])
     );
 }
