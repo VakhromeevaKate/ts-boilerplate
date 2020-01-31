@@ -1,11 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
-require('dotenv').config()
+require('dotenv').config();
 const ENV = process.env.APP_ENV;
-const isDev = ENV === 'dev'
+const isDev = ENV === 'dev';
 const isProd = ENV === 'prod';
 function setDevTool() {  // function to set dev-tool depending on environment
     if (isDev) {
@@ -19,13 +19,13 @@ function setDevTool() {  // function to set dev-tool depending on environment
 const config = {
   entry: __dirname + "/src/app/index.ts",
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '',
     filename: 'build.js',
-    publicPath: '/' 
+    publicPath: ''
   },
   devtool: setDevTool(),
-  module: { 
-    rules: [ 
+  module: {
+    rules: [
 
       {
         test: /\.vue$/,
@@ -84,12 +84,13 @@ const config = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    contentBase: './src/public',
+    port: 7700
   },
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: __dirname + "/src/index.html",
@@ -100,12 +101,8 @@ const config = {
     }),
     new VueLoaderPlugin()
   ],
-  devServer: {
-      contentBase: './src/public',
-      port: 7700,
-  } 
-}                                                           
-                 
+};
+
 if (isProd) {
     config.plugins.push(
         new UglifyJSPlugin(),
@@ -113,5 +110,6 @@ if (isProd) {
           from: __dirname + '/src/public'
       }])
     );
-}; 
+}
+
 module.exports = config;
