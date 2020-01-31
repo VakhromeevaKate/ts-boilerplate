@@ -49,7 +49,7 @@ const config = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', 'latest' ],
-            plugins: [ "@babel/plugin-transform-async-to-generator", "syntax-async-functions" ]
+            plugins: [ "@babel/plugin-transform-async-to-generator" ]
           }
         },
         exclude: [
