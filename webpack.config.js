@@ -20,7 +20,7 @@ function setDevTool() {  // function to set dev-tool depending on environment
 
 const config = {
   mode: ENV,
-  entry: __dirname + "/src/app/index.js",
+  entry: __dirname + "/src/app/index.ts",
   output: {
     path: __dirname + '/dist',
     filename: 'build.js',
@@ -45,13 +45,7 @@ const config = {
       },
       {
         test: /\.js$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', 'latest' ],
-            plugins: [ "@babel/plugin-transform-async-to-generator" ]
-          }
-        },
+        loader: 'babel-loader',
         exclude: [
           /node_modules/
         ]

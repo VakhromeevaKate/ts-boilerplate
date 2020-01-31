@@ -1,10 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import App from "./components/App.vue";
 import { getList } from "./service/ratesService";
 
+declare var require: any;
+let App = require('./components/App.vue').default;
+
 window.onload = () => {
-    getList(console.log);
+    getList();
     new Vue(App);
     Vue.use(Vuex);
 };
