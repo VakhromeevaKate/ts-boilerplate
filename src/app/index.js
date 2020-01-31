@@ -1,13 +1,8 @@
 import Vue from "vue";
+import Vuex from "vuex";
+import App from "./components/App.vue";
 
-let v = new Vue({
-    el: "#app",
-    template: `
-    <div>
-        <div>Hello {{name}}!</div>
-        Name: <input v-model="name" type="text">
-    </div>`,
-    data: {
-        name: "World"
-    }
-});
+window.onload = () => {
+    new Vue(App);
+    Vue.use(Vuex);
+};
