@@ -48,11 +48,13 @@
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "uglifyjs-webpack-plugin": "^2.2.0",
+    "vue-class-component": "^7.2.2",
     "vue-loader": "^15.8.3",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.1.5",
     "vue-template-compiler": "^2.6.11",
     "vueify": "^9.4.1",
+    "vuex-class": "^0.3.2",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"

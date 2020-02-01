@@ -1,18 +1,23 @@
 <template>
-    <NavBar title="Exchange rate"></NavBar>
+    <div>
+        <NavBar title="Exchange rate"></NavBar>
+    </div>
 </template>
 
 <script>
 import NavBar from "./NavBar.vue";
+import store from "../store/store"
 
 export default {
-    // store,
+    store,
     el: '#app',
     components: {
         NavBar
     },
     mounted: function() {
-        console.log("app is mounted")
+        this.$store.dispatch("rates/fetchData");
+        this.$store.dispatch("rates/sayHello");
+        console.log(this.$store.rates);
     }
 }
 </script>
