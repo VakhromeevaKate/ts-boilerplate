@@ -16,8 +16,7 @@ export default {
     },
     mounted: function() {
         this.$store.dispatch("rates/fetchData");
-        this.$store.dispatch("rates/sayHello");
-        console.log(this.$store.rates);
+        console.log(this.$store);
     }
 }
 </script>

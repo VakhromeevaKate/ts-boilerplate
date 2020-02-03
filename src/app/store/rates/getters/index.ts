@@ -1,10 +1,15 @@
 import { GetterTree } from 'vuex';
-import { IRatesState, IRates } from '../types';
+import { IState } from '../types';
 import { RootState } from '../../types';
 
-export const getters: GetterTree<IRatesState, RootState> = {
-    getRates(state): IRates {
-        const { rates } = state;
-        return rates
+export const getters: GetterTree<IState, RootState> = {
+    getRates(state): object {
+        return state.rates.rates;
+    },
+    getBase(state): string {
+        return state.rates.base;
+    },
+    getDate(state): string {
+        return state.rates.date;
     }
 };

@@ -1,14 +1,13 @@
 import { MutationTree } from 'vuex';
-import { IRatesState, IRates } from '../types';
+import { IState, IRates } from '../types';
 
-export const mutations: MutationTree<IRatesState> = {
+export const mutations: MutationTree<IState> = {
     ratesLoaded(state, payload: IRates) {
-        state.error = false;
-        state.rates = payload;
+        state.rates.error = false;
+        state.rates.rates = payload.rates;
     },
     ratesError(state) {
-        state.error = true;
-        // @ts-ignore
-        state.rates = undefined;
+        state.rates.error = true;
+        state.rates.rates = {};
     }
 };

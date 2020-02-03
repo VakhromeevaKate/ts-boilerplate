@@ -1,9 +1,17 @@
+export interface IState {
+    rates: IRatesState
+}
+
 export interface IRatesState {
-    rates: IRates;
+    base: string,
+    rates: object,
+    date: string,
     error: boolean
 }
 
 export interface IRates {
-    data: any
+    base: string,
+    rates: object,
+    date: string,
     error?: boolean
 }
