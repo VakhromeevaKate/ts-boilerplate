@@ -1,5 +1,7 @@
-export interface IState {
-    rates: IRatesState
+export interface IParams {
+    base?: string,
+    date?:  string,
+    symbols?: string,
 }
 
 export interface IRatesState {
@@ -12,6 +14,6 @@ export interface IRatesState {
 export interface IRates {
     base: string,
     rates: object,
-    date: string,
+    date:  string,
     error?: boolean
 }

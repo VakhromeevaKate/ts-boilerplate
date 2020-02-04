@@ -5,9 +5,9 @@
 </template>
 
 <script>
-export default {
-    props: ["title"]
-}
+    export default {
+        props: ["title"]
+    }
 </script>
 
 <style lang="scss" scoped>

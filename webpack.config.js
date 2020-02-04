@@ -51,6 +51,10 @@ const config = {
         ]
       },
       {
+        test: /\.css$/,
+        loader: "css-loader"
+      },
+      {
         test: /\.tsx?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
