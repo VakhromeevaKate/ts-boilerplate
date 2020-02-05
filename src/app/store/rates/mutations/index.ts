@@ -16,9 +16,10 @@ export const mutations: MutationTree<IRatesState> = {
         state.date = payload
     },
     updateBase (state, payload) {
-        state.base = payload
+        state.base = payload;
     },
-    updateSymbol (state, payload) {
-        state.symbol = payload
+    updateSymbols (state, payload) {
+        console.log(payload);
+        // state.symbols = payload
     }
 };

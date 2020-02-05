@@ -17,9 +17,10 @@
             </UiSelect>
             <UiSelect
                     label="filter"
+                    multiple
                     placeholder="ALL"
                     :options="symbolOptions"
-                    v-model="selectedSymbol" >
+                    v-model="symbols" >
             </UiSelect>
         </div>
         <div>
@@ -62,6 +63,11 @@ export default {
         UiButton,
         UiSelect
     },
+    data: () => {
+      return {
+          symbols:[]
+      }
+    },
     computed: {
         selectedDate: {
             get() {
@@ -76,7 +82,7 @@ export default {
                 this.$store.dispatch('rates/updateDate', date.format('YYYY-MM-DD'));
                 this.$store.dispatch(
                     "rates/fetchData",
-                    { base: this.selectedBase, date: date.format('YYYY-MM-DD'), symbols: this.symbolForApi }
+                    { base: this.selectedBase, date: date.format('YYYY-MM-DD'), symbols: this.symbolsForApi }
                 );
             }
         },
@@ -93,23 +99,20 @@ export default {
                 this.$store.dispatch('rates/updateBase', value);
                 this.$store.dispatch(
                     "rates/fetchData",
-                    { base: value, date: this.stringifySelectedDate, symbols: this.symbolForApi });
+                    { base: value, date: this.stringifySelectedDate, symbols: this.symbolsForApi });
             }
         },
-        selectedSymbol: {
+        selectedSymbols: {
             get() {
-                return this.$store.state.rates.symbol
+                return this.$store.state.rates.symbols
             },
-            set(value) {
-                this.$store.dispatch('rates/updateSymbol', value);
-                this.$store.dispatch(
-                    "rates/fetchData",
-                    { base: this.selectedBase, date: this.stringifySelectedDate, symbols: this.symbolForApi });
+            set() {
+                this.$store.dispatch('rates/updateSymbols', value);
             }
         },
-        symbolForApi: {
+        symbolsForApi: {
             get() {
-                return this.selectedSymbol === 'ALL' ? null : this.selectedSymbol;
+                return this.symbols === [] ? null : this.symbols;
             }
         },
         baseOptions: {
@@ -119,7 +122,7 @@ export default {
         },
         symbolOptions: {
             get() {
-                return [ 'ALL', ...Object.keys(this.$store.state.rates.rates)];
+                return Object.keys(this.$store.state.rates.rates);
             }
         },
         ratesList: {
@@ -136,11 +139,17 @@ export default {
         updateRates() {
             const base = this.selectedBase;
             const date = moment(this.selectedDate).format('YYYY-MM-DD');
-            const symbols = this.symbolForApi;
+            const symbols = this.symbolsForApi;
             this.$store.dispatch(
                 "rates/fetchData",
                 { base, date, symbols }
             );
+        },
+        updateSymbols(value) {
+            this.$store.dispatch('rates/updateSymbols', value);
+            this.$store.dispatch(
+                "rates/fetchData",
+                { base: this.selectedBase, date: this.stringifySelectedDate, symbols: this.symbolsForApi });
         }
     }
 }

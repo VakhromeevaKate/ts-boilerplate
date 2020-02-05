@@ -1,13 +1,13 @@
 export interface IParams {
     base?: string,
     date?:  string,
-    symbols?: string,
+    symbols: Array<string>,
 }
 
 export interface IRatesState {
     base: string,
     rates: object,
-    symbol: string,
+    symbols: Array<string>,
     date: string,
     error: boolean
 }

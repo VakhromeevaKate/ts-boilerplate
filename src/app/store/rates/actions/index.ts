@@ -9,13 +9,13 @@ export const actions: ActionTree<IRatesState, RootState> = {
         const date = payload.date || 'latest';
         let getParams = '';
 
-        if (payload.base && payload.symbols) {
-            getParams =  `?base=${payload.base}&symbols=${payload.symbols}`;
+        if (payload.base && payload.symbols && payload.symbols.length > 0) {
+            getParams =  `?base=${payload.base}&symbols=${payload.symbols.join(',')}`;
         }
-        if (payload.base && !payload.symbols) {
+        if (payload.base && payload.symbols && payload.symbols.length === 0) {
             getParams =  `?base=${payload.base}`;
         }
-        if (!payload.base && payload.symbols) {
+        if (!payload.base && payload.symbols && payload.symbols.length > 0) {
             getParams =  `?symbols=${payload.symbols}`;
         }
 
@@ -34,9 +34,9 @@ export const actions: ActionTree<IRatesState, RootState> = {
     },
     updateBase({ commit }, payload): any {
         commit('updateBase', payload);
-
     },
-    updateSymbol({ commit }, payload): any {
-        commit('updateSymbol', payload);
+    updateSymbols({ commit }, payload): any {
+        console.log('updateSymbols', payload);
+        commit('updateSymbols', payload);
     }
 };

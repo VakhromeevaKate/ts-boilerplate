@@ -8,7 +8,7 @@ import { RootState } from '../types';
 export const state: IRatesState = {
     rates: {},
     base: '',
-    symbol: '',
+    symbols: [],
     date: '',
     error: false,
 };
