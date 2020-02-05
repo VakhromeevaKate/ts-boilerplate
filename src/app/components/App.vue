@@ -67,7 +67,11 @@ export default {
             },
             set(value) {
                 const date = moment(value, 'YYYY-MM-DD');
-                this.$store.dispatch('rates/updateDate', date.format('YYYY-MM-DD'))
+                this.$store.dispatch('rates/updateDate', date.format('YYYY-MM-DD'));
+                this.$store.dispatch(
+                    "rates/fetchData",
+                    { base: this.selectedBase, date: date.format('YYYY-MM-DD') }
+                );
             }
         },
         stringifySelectedDate: {
@@ -81,6 +85,9 @@ export default {
             },
             set(value) {
                 this.$store.dispatch('rates/updateBase', value);
+                this.$store.dispatch(
+                    "rates/fetchData",
+                    { base: value, date: this.stringifySelectedDate });
             }
         },
         baseOptions: {
@@ -102,11 +109,11 @@ export default {
         updateRates() {
             const base = this.selectedBase;
             const date = moment(this.selectedDate).format('YYYY-MM-DD');
-            console.log('updateRates', { base, date });
+            this.$store.dispatch(
+                "rates/fetchData",
+                { base, date }
+            );
         }
-    },
-    mounted: function() {
-        this.$store.dispatch("rates/fetchData");
     }
 }
 </script>
