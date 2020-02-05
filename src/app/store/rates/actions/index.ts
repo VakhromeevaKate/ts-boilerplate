@@ -35,5 +35,8 @@ export const actions: ActionTree<IRatesState, RootState> = {
     updateBase({ commit }, payload): any {
         commit('updateBase', payload);
 
+    },
+    updateSymbol({ commit }, payload): any {
+        commit('updateSymbol', payload);
     }
 };

@@ -15,6 +15,12 @@
                 :options="baseOptions"
                 v-model="selectedBase" >
             </UiSelect>
+            <UiSelect
+                    label="filter"
+                    placeholder="ALL"
+                    :options="symbolOptions"
+                    v-model="selectedSymbol" >
+            </UiSelect>
         </div>
         <div>
             <Table
@@ -70,7 +76,7 @@ export default {
                 this.$store.dispatch('rates/updateDate', date.format('YYYY-MM-DD'));
                 this.$store.dispatch(
                     "rates/fetchData",
-                    { base: this.selectedBase, date: date.format('YYYY-MM-DD') }
+                    { base: this.selectedBase, date: date.format('YYYY-MM-DD'), symbols: this.symbolForApi }
                 );
             }
         },
@@ -87,12 +93,33 @@ export default {
                 this.$store.dispatch('rates/updateBase', value);
                 this.$store.dispatch(
                     "rates/fetchData",
-                    { base: value, date: this.stringifySelectedDate });
+                    { base: value, date: this.stringifySelectedDate, symbols: this.symbolForApi });
+            }
+        },
+        selectedSymbol: {
+            get() {
+                return this.$store.state.rates.symbol
+            },
+            set(value) {
+                this.$store.dispatch('rates/updateSymbol', value);
+                this.$store.dispatch(
+                    "rates/fetchData",
+                    { base: this.selectedBase, date: this.stringifySelectedDate, symbols: this.symbolForApi });
+            }
+        },
+        symbolForApi: {
+            get() {
+                return this.selectedSymbol === 'ALL' ? null : this.selectedSymbol;
             }
         },
         baseOptions: {
             get() {
                 return Object.keys(this.$store.state.rates.rates);
+            }
+        },
+        symbolOptions: {
+            get() {
+                return [ 'ALL', ...Object.keys(this.$store.state.rates.rates)];
             }
         },
         ratesList: {
@@ -109,9 +136,10 @@ export default {
         updateRates() {
             const base = this.selectedBase;
             const date = moment(this.selectedDate).format('YYYY-MM-DD');
+            const symbols = this.symbolForApi;
             this.$store.dispatch(
                 "rates/fetchData",
-                { base, date }
+                { base, date, symbols }
             );
         }
     }

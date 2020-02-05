@@ -7,6 +7,7 @@ export interface IParams {
 export interface IRatesState {
     base: string,
     rates: object,
+    symbol: string,
     date: string,
     error: boolean
 }
