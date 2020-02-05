@@ -19,7 +19,9 @@ export const mutations: MutationTree<IRatesState> = {
         state.base = payload;
     },
     updateSymbols (state, payload) {
-        console.log(payload);
-        // state.symbols = payload
+        state.symbols = payload
+    },
+    currencyListLoaded (state, payload ) {
+        state.currencyList = payload
     }
 };

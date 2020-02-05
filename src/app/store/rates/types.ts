@@ -9,7 +9,8 @@ export interface IRatesState {
     rates: object,
     symbols: Array<string>,
     date: string,
-    error: boolean
+    error: boolean,
+    currencyList: Array<string>
 }
 
 export interface IRates {

@@ -1,9 +1,9 @@
 <template>
     <div class="table">
         <div class="table-header">
-            <span class="table-header-text">Rates for {{ date }}, base is {{ base }}</span>
+            <span class="table-header-text">Rates for {{ selectedDate }}, base is {{ selectedBase }}</span>
         </div>
-        <div v-for="rate in rates" class="table-row">
+        <div v-for="rate in ratesList" class="table-row">
             <div class="table-column">{{ rate.name }}</div>
             <div class="table-column">{{ rate.value }}</div>
         </div>
@@ -11,8 +11,33 @@
 </template>
 
 <script>
+    import store from "../store/store";
+
     export default {
-        props: ["date", "rates", "base"],
+        store,
+        el: '#table',
+        computed: {
+            ratesList: {
+                get() {
+                    const { rates } = this.$store.state.rates;
+                    let list = [];
+                    for (let key in rates) {
+                        list.push({ name: key, value: rates[key] });
+                    }
+                    return list;
+                }
+            },
+            selectedBase: {
+                get() {
+                    return this.$store.state.rates.base;
+                }
+            },
+            selectedDate: {
+                get() {
+                    return this.$store.state.rates.date;
+                }
+            }
+        }
     }
 </script>
 

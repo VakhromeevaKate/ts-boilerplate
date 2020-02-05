@@ -7,15 +7,16 @@ import { RootState } from '../../types';
 export const actions: ActionTree<IRatesState, RootState> = {
     fetchData({ commit }, payload: IParams): any {
         const date = payload.date || 'latest';
+        const symbols = payload.symbols && payload.symbols.length > 0 ? payload.symbols : null;
         let getParams = '';
 
-        if (payload.base && payload.symbols && payload.symbols.length > 0) {
-            getParams =  `?base=${payload.base}&symbols=${payload.symbols.join(',')}`;
+        if (payload.base && symbols) {
+            getParams =  `?base=${payload.base}&symbols=${symbols.join(',')}`;
         }
-        if (payload.base && payload.symbols && payload.symbols.length === 0) {
+        if (payload.base && !symbols) {
             getParams =  `?base=${payload.base}`;
         }
-        if (!payload.base && payload.symbols && payload.symbols.length > 0) {
+        if (!payload.base && symbols) {
             getParams =  `?symbols=${payload.symbols}`;
         }
 
@@ -29,6 +30,17 @@ export const actions: ActionTree<IRatesState, RootState> = {
             commit('ratesError');
         });
     },
+    fetchCurrencyList({ commit }): any {
+        axios({
+            url: `https://api.ratesapi.io/api/latest`
+        }).then((response) => {
+            const payload: IRates = response && response.data;
+            commit('currencyListLoaded', Object.keys(payload.rates));
+        }, (error) => {
+            console.log(error);
+            commit('currencyListError');
+        });
+    },
     updateDate({ commit }, payload): any {
         commit('updateDate', payload);
     },
@@ -36,7 +48,6 @@ export const actions: ActionTree<IRatesState, RootState> = {
         commit('updateBase', payload);
     },
     updateSymbols({ commit }, payload): any {
-        console.log('updateSymbols', payload);
         commit('updateSymbols', payload);
     }
 };

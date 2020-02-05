@@ -12,6 +12,9 @@ export const getters: GetterTree<IRatesState, RootState> = {
     getDate(state): string {
         return state.date;
     },
+    getSymbols(state): Array<string> {
+        return state.symbols;
+    },
     getError(state): string {
         return (state.error || '').toString();
     }

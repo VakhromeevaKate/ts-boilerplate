@@ -9,6 +9,7 @@ export const state: IRatesState = {
     rates: {},
     base: '',
     symbols: [],
+    currencyList: [],
     date: '',
     error: false,
 };
