@@ -12,8 +12,15 @@
 
 <style lang="scss" scoped>
     .nav-bar {
-        background: linear-gradient(-90deg, #84CF6A, #16C0B0);
-        height: 60px;
+        background-color: #2196f3;
+        color: white;
+        display: flex;
+        height: 5rem;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: center;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         margin-bottom: 15px;
+        border-radius: 3px;
     }
 </style>
