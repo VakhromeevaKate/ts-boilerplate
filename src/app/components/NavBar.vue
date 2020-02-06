@@ -1,26 +1,39 @@
 <template>
     <div class="nav-bar">
-        <h1>{{ title }}</h1>
+        <div class="nav-bar-header">
+            <div class="nav-bar-element">
+                <h1>{{ title }}</h1>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ["title"]
+        props: ["title"],
     }
 </script>
 
 <style lang="scss" scoped>
+    $accent-color: #2196f3;
     .nav-bar {
-        background-color: #2196f3;
-        color: white;
+        color: $accent-color;
         display: flex;
         height: 5rem;
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-        justify-content: center;
+        justify-content: space-between;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-        margin-bottom: 15px;
         border-radius: 3px;
     }
+
+    .nav-bar-header {
+        width: 100%;
+        margin: auto 2rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-bar-element {
+        margin: 10px;
+    }
+
 </style>

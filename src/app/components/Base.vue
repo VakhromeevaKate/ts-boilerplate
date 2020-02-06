@@ -1,10 +1,12 @@
 <template>
-    <UiSelect
+    <div class="ui-base">
+        <UiSelect
             label="Base currency"
             placeholder="Select base"
             :options="baseOptions"
             v-model="selectedBase" >
-    </UiSelect>
+        </UiSelect>
+    </div>
 </template>
 
 <script>
@@ -44,3 +46,10 @@
     }
 
 </script>
+
+<style lang="scss" scoped>
+    .ui-base {
+        width: 20rem;
+        margin: 10px;
+    }
+</style>

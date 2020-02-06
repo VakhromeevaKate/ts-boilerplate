@@ -1,13 +1,15 @@
 $bg-color: white;
 
-#filter {
-  display: inline-block;
-}
-
-#result {
-
-}
-
 body {
   background: $bg-color;
+}
+
+#filter {
+  display: flex;
+  justify-content: flex-start;
+  margin: auto 2rem;
+}
+
+#selects {
+  display: block;
 }

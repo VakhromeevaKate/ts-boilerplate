@@ -1,11 +1,13 @@
 <template>
-    <UiCalendar
-        v-model="selectedDate"
-        :maxDate="new Date()"
-        color="primary"
-        :raised="true"
-        :square-cells="false">
-    </UiCalendar>
+    <div class="ui-date">
+        <UiCalendar
+            v-model="selectedDate"
+            :maxDate="new Date()"
+            color="primary"
+            :raised="true"
+            :square-cells="false">
+        </UiCalendar>
+    </div>
 </template>
 
 <script>
@@ -46,3 +48,11 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    .ui-date {
+        min-width: 18rem;
+        max-width: 20rem;
+        margin: 10px;
+    }
+</style>

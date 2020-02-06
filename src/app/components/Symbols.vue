@@ -1,11 +1,13 @@
 <template>
-    <UiSelect
+    <div class="ui-symbols">
+        <UiSelect
             label="filter"
             multiple
             placeholder="ALL"
             :options="symbolOptions"
             v-model="symbols" >
-    </UiSelect>
+        </UiSelect>
+    </div>
 </template>
 
 <script>
@@ -46,3 +48,10 @@
         },
     }
 </script>
+
+<style lang="scss" scoped>
+    .ui-symbols {
+        width: 20rem;
+        margin: 10px;
+    }
+</style>

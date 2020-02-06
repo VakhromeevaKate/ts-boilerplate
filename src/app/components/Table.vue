@@ -1,5 +1,5 @@
 <template>
-    <div class="table">
+    <div class="table ui-table">
         <div class="table-header">
             <span class="table-header-text">Rates for {{ selectedDate }}, base is {{ selectedBase }}</span>
         </div>
@@ -45,18 +45,26 @@
 </script>
 
 <style lang="scss" scoped>
+    $table-height: 19rem;
+    $table-min-width: 20rem;
+    $table-max-width: 25rem;
+    $table-header-height: 3rem;
+
     .table {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2);
         border-radius: 3px !important;
-        margin-top: 10px ;
+        margin: 10px;
+        min-width:  $table-min-width;
+        max-width:  $table-max-width;
+        height:  $table-height;
     }
     .table-header {
         background-color: #2196f3;
         color: white;
         font-size: 0.9375rem;
         font-weight: 600;
-        height: 3rem;
+        height: $table-header-height;
         text-align: center;
         -webkit-box-align: center;
         -ms-flex-align: center;
@@ -72,7 +80,7 @@
     }
 
     .table-body {
-        height: 20rem;
+        height: 15rem;
         overflow-y: auto
     }
 
