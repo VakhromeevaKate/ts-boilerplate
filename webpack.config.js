@@ -9,7 +9,7 @@ const ENV = process.env.APP_ENV;
 const isDev = ENV === 'development';
 const isProd = ENV === 'production';
 
-function setDevTool() {  // function to set dev-tool depending on environment
+function setDevTool() {
     if (isDev) {
       return 'inline-source-map';
     } else if (isProd) {
@@ -67,38 +67,17 @@ const config = {
         test: /\.(png|jpg|gif|svg|ico|jpeg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          name: '/assets/[name].[ext]?[hash]'
         }
       },
       {
         test: /\.(sass|scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
-          // "vue-style-loader",
-          // "style-loader",
           "css-loader",
           "resolve-url-loader",
           "sass-loader"
         ]
-        /* use: [{
-            loader: "vue-style-loader"
-          },
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader"
-          },
-          {
-            loader: "resolve-url-loader"
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: true
-            }
-          }
-        ]*/
       }
     ]
   },
@@ -126,7 +105,7 @@ const config = {
       filename: 'styles.css',
       chunkFilename: '[id].css',
     }),
-    new webpack.DefinePlugin({  // plugin to define global constants
+    new webpack.DefinePlugin({
         API_KEY: JSON.stringify(process.env.API_KEY)
     }),
     new VueLoaderPlugin()
