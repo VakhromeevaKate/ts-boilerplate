@@ -5,7 +5,9 @@
         </div>
         <div class="table-body">
             <div v-for="rate in ratesList" class="table-row">
-                <div class="table-column">{{ rate.icon || 'icon' }}</div>
+                <div class="table-column">
+                    <div :class="getIconClassName(rate.name)"></div>
+                </div>
                 <div class="table-column">{{ rate.name }}</div>
                 <div class="table-column">{{ rate.value }}</div>
             </div>
@@ -39,6 +41,15 @@
                 get() {
                     return this.$store.state.rates.date;
                 }
+            }
+        },
+        methods: {
+            getIconClassName(name) {
+                const currencyList = ['RUB', 'EUR'];
+                const className = currencyList.indexOf(name) >= 0 ?
+                    `icon ${name}` :
+                    'icon any';
+                return className.toLowerCase();
             }
         }
     }
@@ -101,4 +112,21 @@
         min-width: 3rem;
         text-align: left;
     }
+    .icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .any {
+        background-image: url(../icons/any.svg);
+    }
+
+    .rub {
+        background-image: url(../icons/rur.svg);
+    }
+
+    .eur {
+        background-image: url(../icons/eur.svg);
+    }
+
 </style>
