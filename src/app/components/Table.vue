@@ -3,9 +3,12 @@
         <div class="table-header">
             <span class="table-header-text">Rates for {{ selectedDate }}, base is {{ selectedBase }}</span>
         </div>
-        <div v-for="rate in ratesList" class="table-row">
-            <div class="table-column">{{ rate.name }}</div>
-            <div class="table-column">{{ rate.value }}</div>
+        <div class="table-body">
+            <div v-for="rate in ratesList" class="table-row">
+                <div class="table-column">{{ rate.icon || 'icon' }}</div>
+                <div class="table-column">{{ rate.name }}</div>
+                <div class="table-column">{{ rate.value }}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -45,7 +48,8 @@
     .table {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2);
-        border-radius: 3px;
+        border-radius: 3px !important;
+        margin-top: 10px ;
     }
     .table-header {
         background-color: #2196f3;
@@ -63,11 +67,20 @@
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
         justify-content: space-between;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
     }
+
+    .table-body {
+        height: 20rem;
+        overflow-y: auto
+    }
+
     .table-header-text {
         margin: auto;
         display: block;
     }
+
     .table-row {
         display: flex;
         justify-content: inherit;

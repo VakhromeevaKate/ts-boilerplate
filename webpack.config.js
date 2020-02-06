@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
@@ -71,15 +72,33 @@ const config = {
       },
       {
         test: /\.(sass|scss)$/,
-        use: [{
+        use: [
+          MiniCssExtractPlugin.loader,
+          // "vue-style-loader",
+          // "style-loader",
+          "css-loader",
+          "resolve-url-loader",
+          "sass-loader"
+        ]
+        /* use: [{
             loader: "vue-style-loader"
-        }, {
-            loader: "style-loader" // creates style nodes from JS strings
-        }, {
-            loader: "css-loader" // translates CSS into CommonJS
-        }, {
-            loader: "sass-loader" // compiles Sass to CSS
-        }]
+          },
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "resolve-url-loader"
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true
+            }
+          }
+        ]*/
       }
     ]
   },
@@ -92,7 +111,7 @@ const config = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    contentBase: './src/public',
+    contentBase: './src',
     port: 7700
   },
   performance: {
@@ -102,6 +121,10 @@ const config = {
     new HtmlWebpackPlugin({
       template: __dirname + "/src/index.html",
       inject: 'body'
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css',
+      chunkFilename: '[id].css',
     }),
     new webpack.DefinePlugin({  // plugin to define global constants
         API_KEY: JSON.stringify(process.env.API_KEY)

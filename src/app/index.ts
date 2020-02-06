@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 // @ts-ignore
 import KeenUI from "keen-ui";
+import "./styles.scss";
 
 declare var require: any;
 let App = require('./components/App.vue').default;
