@@ -46,7 +46,7 @@
 
 <style lang="scss" scoped>
     $table-height: 19rem;
-    $table-min-width: 20rem;
+    $table-min-width: 18rem;
     $table-max-width: 25rem;
     $table-header-height: 3rem;
 

@@ -64,7 +64,7 @@ const config = {
         }
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|ico|jpeg)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'

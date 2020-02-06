@@ -3,6 +3,7 @@ import Vuex from "vuex";
 // @ts-ignore
 import KeenUI from "keen-ui";
 import "./styles.scss";
+import "../favicon.ico";
 
 declare var require: any;
 let App = require('./components/App.vue').default;

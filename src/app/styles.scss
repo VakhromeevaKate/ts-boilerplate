@@ -5,8 +5,10 @@ body {
 }
 
 #filter {
-  display: flex;
-  justify-content: flex-start;
+  @media screen and (min-width: 1025px) {
+    display: flex;
+    justify-content: flex-start;
+  }
   margin: auto 2rem;
 }
 
